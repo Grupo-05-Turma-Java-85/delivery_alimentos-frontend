@@ -12,10 +12,11 @@ import ListaCategoria from './components/categoria/listacategoria/ListaCategoria
 import LojistaHome from './pages/lojistahome/LojistaHome'
 
 import ListaProduto from './components/produto/listaproduto/ListaProduto'
-
-import DeletarCategoria from './components/categoria/deletarcategoria/DeletarCategoria'
 import Contatos from './pages/contato/Contato'
 import Sobre from './pages/sobre/Sobre'
+import { ToastContainer } from 'react-toastify'
+import FormCategoria from './components/categoria/formcategoria/FormCategoria'
+import FormProduto from './components/produto/formproduto/FormProduto'
 
 function App() {
 
@@ -56,6 +57,11 @@ function App() {
           />
 
           <Route
+            path="/modificar-produtos"
+            element={<ListaProduto modoEdicao={true} />}
+          />
+
+          <Route
             path="/produtos"
             element={<ListaProduto />}
           />
@@ -66,13 +72,21 @@ function App() {
           />
 
           <Route
-            path="/deletarcategoria/:id"
-            element={<DeletarCategoria />}
+            path="/categorias/cadastrar"
+            element={<FormCategoria />}
+          />
+
+          <Route
+            path="/produtos/cadastrar"
+            element={<FormProduto />}
           />
 
         </Routes>
 
         <Footer />
+
+        <ToastContainer />
+
 
       </BrowserRouter>
 

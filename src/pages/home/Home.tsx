@@ -30,9 +30,9 @@ export default function Home() {
           <div className="md:w-1/2 flex justify-end">
             <div className="rounded-3xl overflow-hidden shadow-md max-w-md w-full">
               <img
-                src="https://images.unsplash.com/photo-1540420773420-3366772f4999?w=800"
+                src="https://ik.imagekit.io/bellaceccon/fitnutri_capa_conheca_03.png"
                 alt="Prato Saudável - Bowl de Frango e Salada"
-                className="w-full h-80 object-cover"
+                className="w-full h-70 object-cover"
               />
             </div>
           </div>

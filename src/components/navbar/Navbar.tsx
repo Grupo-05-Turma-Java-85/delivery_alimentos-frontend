@@ -22,7 +22,7 @@ function Navbar() {
                     <StorefrontIcon size={28} weight="fill" />  Área do Lojista
                 </button></Link>
                 <div className="w-10 h-10 rounded-full overflow-hidden bg-surface-container border border-outline-variant cursor-pointer">
-                    <img className="w-full h-full object-cover" src="/avatar-placeholder.png" alt="Perfil" />
+                    <img className="w-full h-full object-cover" src="https://ik.imagekit.io/bellaceccon/fitnutri_icone_perfil.png" alt="Perfil" />
                 </div>
             </div>
         </header>

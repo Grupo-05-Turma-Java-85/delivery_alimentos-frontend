@@ -100,7 +100,7 @@ function CardCategorias({
  
           {/* Botões de edição */}
           {modoEdicao && (
-<div className="relative z-20 flex items-center gap-2">
+<div className="relative z-20 grid items-center gap-2">
  
               {/* Editar */}
 <button
