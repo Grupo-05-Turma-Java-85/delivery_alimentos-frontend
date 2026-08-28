@@ -1,6 +1,6 @@
 # Delivery Alimentos FitNutri - Frontend
 
-[FitHub Delivery](#delivery-alimentos-fitnutri---frontend)
+**Interface web para um sistema de delivery de alimentos saudáveis voltado ao segmento fitness.**
 
 ## 1. Descrição
 
