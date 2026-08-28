@@ -6,27 +6,39 @@ import { buscar } from "../../service/Service";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { SyncLoader } from "react-spinners";
-
-
-
-function getNutriScore(calories) {
+ 
+function getNutriScore(calories: number) {
     if (calories <= 300) return 'A';
     if (calories <= 500) return 'B';
     return 'C';
 }
-
-function CardHome() {
+ 
+// Aceita categoria como string OU como objeto { categoria: string, ... }
+function getNomeCategoria(categoria: unknown): string {
+    if (!categoria) return '';
+    if (typeof categoria === 'string') return categoria;
+    if (typeof categoria === 'object' && 'categoria' in categoria) {
+        return (categoria as { categoria: string }).categoria;
+    }
+    return '';
+}
+ 
+interface CardHomeProps {
+    categoriaSelecionada?: string;
+}
+ 
+function CardHome({ categoriaSelecionada = 'Todas' }: CardHomeProps) {
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [produtos, setProdutos] = useState<Produto[]>([]);
-
+ 
     useEffect(() => {
         buscarProdutos();
     }, []);
-
+ 
     async function buscarProdutos() {
         try {
             setIsLoading(true);
-
+ 
             await buscar("/produtos", setProdutos, {});
         } catch (error) {
             if (axios.isAxiosError(error) && error.response?.status === 401) {
@@ -36,7 +48,11 @@ function CardHome() {
             setIsLoading(false);
         }
     }
-
+ 
+    const produtosFiltrados = categoriaSelecionada === 'Todas'
+        ? produtos
+        : produtos.filter((produto) => getNomeCategoria(produto.categoria) === categoriaSelecionada);
+ 
     return (
         <section className="space-y-6">
             <div className="flex justify-between items-center">
@@ -52,25 +68,27 @@ function CardHome() {
                     <SyncLoader color="#298451" size={32} />
                 </div>
             )}
+            {!isLoading && produtosFiltrados.length === 0 && (
+                <p className="text-on-surface-variant text-sm text-center py-8">
+                    Nenhum produto encontrado nessa categoria.
+                </p>
+            )}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                {produtos.map((produto) => {
+                {produtosFiltrados.map((produto) => {
                     const score = getNutriScore(produto.calorias);
-
+ 
                     return (
                         <article
                             key={produto.id}
                             className="group relative bg-surface-container-lowest rounded-2xl overflow-hidden shadow-xs hover:shadow-md transition-all flex flex-col justify-between"
-
                         >
-                            {/* Container da Imagem */}
                             <div className="relative h-48 bg-surface-container overflow-hidden">
                                 <img
                                     src={produto.imagem}
                                     alt={produto.produto}
                                     className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                                 />
-
-                                {/* Card/Tooltip de Transparência Nutricional (Hover) */}
+ 
                                 <div className="absolute inset-0 bg-black/20 backdrop-blur-[2px] opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center p-4">
                                     <div className="bg-white rounded-xl p-3 shadow-lg text-center w-full max-w-[200px]">
                                         <h4 className="text-emerald-700 font-bold text-xs">
@@ -81,15 +99,13 @@ function CardHome() {
                                         </p>
                                     </div>
                                 </div>
-
-                                {/* Badge Nutri-Score */}
+ 
                                 <span className="absolute top-3 right-3 bg-lime-400 text-emerald-950 font-bold text-[11px] px-3 py-1 rounded-full flex items-center gap-1 shadow-xs z-10">
                                     Nutri-Score {score}
                                     <CheckFatIcon size={12} weight="fill" />
                                 </span>
                             </div>
-
-                            {/* Informações do Produto */}
+ 
                             <div className="p-5 flex-1 flex flex-col justify-between space-y-4">
                                 <div>
                                     <h3 className="font-bold text-base font-headline text-on-surface">
@@ -99,15 +115,13 @@ function CardHome() {
                                         {produto.descricao}
                                     </p>
                                 </div>
-
+ 
                                 <div className="flex items-center justify-between pt-2">
                                     <span className="text-lg font-bold font-headline text-primary">
-                                        {produto.valor}
+                                        R${produto.valor}
                                     </span>
                                     <button className="w-9 h-9 rounded-full flex items-center justify-center transition-colors
-                                       
                                         bg-surface-container-high text-primary hover:bg-primary hover:text-on-primary">
-
                                         <PlusIcon size={22} weight="bold" />
                                     </button>
                                 </div>
@@ -119,5 +133,5 @@ function CardHome() {
         </section>
     );
 }
-
+ 
 export default CardHome;

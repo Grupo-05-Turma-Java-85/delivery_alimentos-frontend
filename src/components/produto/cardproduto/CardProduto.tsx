@@ -24,23 +24,30 @@ interface CardProdutoProps {
   onProdutoAtualizado?: (produto: Produto) => void;
 }
 
+function getNutriScore(calories: number) {
+  if (calories <= 300) return "A";
+  if (calories <= 500) return "B";
+  return "C";
+}
+
 function CardProduto({
   produto,
   modoEdicao = false,
   onProdutoDeletado,
   onProdutoAtualizado,
 }: CardProdutoProps) {
-
   const [modalDeletarAberto, setModalDeletarAberto] =
     useState<boolean>(false);
 
   const [modalEditarAberto, setModalEditarAberto] =
     useState<boolean>(false);
 
+  const nutriScore = getNutriScore(
+    Number(produto.calorias)
+  );
+
   return (
-
     <>
-
       <motion.div
         whileHover={{
           scale: 1.03,
@@ -55,7 +62,6 @@ function CardProduto({
         }}
         className="relative w-full"
       >
-
         <article
           className="
             group relative
@@ -74,9 +80,7 @@ function CardProduto({
         >
 
           {/* IMAGEM */}
-
           <div className="relative h-56 bg-surface-container overflow-hidden">
-
             <img
               src={produto.imagem}
               alt={produto.produto}
@@ -91,7 +95,6 @@ function CardProduto({
             />
 
             {/* Nutri-Score */}
-
             <span
               className="
                 absolute
@@ -111,35 +114,46 @@ function CardProduto({
                 z-10
               "
             >
-              Nutri-Score A
+              Nutri-Score {nutriScore}
 
               <CheckFatIcon
                 size={12}
                 weight="fill"
               />
-
             </span>
-
           </div>
 
           {/* INFORMAÇÕES */}
-
           <div className="p-6 flex-1 flex flex-col justify-between space-y-5">
 
             <div>
-
-              <h3 className="font-bold text-lg font-headline text-on-surface">
+              <h3 className="font-bold line-clamp-2 text-lg font-headline text-on-surface">
                 {produto.produto}
               </h3>
 
-              <p className="text-on-surface-variant text-sm mt-2 leading-relaxed">
+              <p className="text-on-surface-variant line-clamp-2 text-sm mt-2 leading-relaxed">
                 {produto.descricao}
               </p>
 
+              {/* TRANSPARÊNCIA NUTRICIONAL */}
+              {!modoEdicao &&
+                !modalEditarAberto &&
+                !modalDeletarAberto && (
+                  <div className="absolute inset-0 bg-black/20 backdrop-blur-[2px] opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center p-4">
+                    <div className="bg-white rounded-xl p-3 shadow-lg text-center w-full max-w-[200px]">
+                      <h4 className="text-emerald-700 font-bold text-xs">
+                        Transparência Nutricional
+                      </h4>
+
+                      <p className="text-gray-600 text-[11px] mt-1 font-medium">
+                        Calorias: {produto.calorias}
+                      </p>
+                    </div>
+                  </div>
+                )}
             </div>
 
             {/* PREÇO + BOTÕES */}
-
             <div className="flex items-center justify-between pt-3">
 
               <span className="text-xl font-bold font-headline text-primary">
@@ -147,11 +161,9 @@ function CardProduto({
               </span>
 
               {modoEdicao ? (
-
                 <div className="flex items-center gap-2">
 
-                  {/* Editar */}
-
+                  {/* EDITAR */}
                   <button
                     type="button"
                     title="Editar produto"
@@ -174,16 +186,13 @@ function CardProduto({
                       hover:scale-105
                     "
                   >
-
                     <PencilIcon
                       size={20}
                       weight="bold"
                     />
-
                   </button>
 
-                  {/* Deletar */}
-
+                  {/* DELETAR */}
                   <button
                     type="button"
                     title="Deletar produto"
@@ -206,18 +215,14 @@ function CardProduto({
                       hover:scale-105
                     "
                   >
-
                     <TrashIcon
                       size={20}
                       weight="bold"
                     />
-
                   </button>
 
                 </div>
-
               ) : (
-
                 <button
                   type="button"
                   className="
@@ -235,28 +240,20 @@ function CardProduto({
                     hover:scale-105
                   "
                 >
-
                   <PlusIcon
                     size={24}
                     weight="bold"
                   />
-
                 </button>
-
               )}
 
             </div>
-
           </div>
-
         </article>
-
       </motion.div>
 
       {/* MODAL DELETAR */}
-
       {modalDeletarAberto && (
-
         <ModalDeletarProduto
           produto={produto}
           fecharModal={() =>
@@ -264,27 +261,19 @@ function CardProduto({
           }
           onProdutoDeletado={onProdutoDeletado}
         />
-
       )}
 
       {/* MODAL EDITAR */}
-
       {modalEditarAberto && (
-
         <ModalEditarProduto
           produto={produto}
           fecharModal={() =>
             setModalEditarAberto(false)
           }
-          onProdutoAtualizado={
-            onProdutoAtualizado
-          }
+          onProdutoAtualizado={onProdutoAtualizado}
         />
-
       )}
-
     </>
-
   );
 }
 
