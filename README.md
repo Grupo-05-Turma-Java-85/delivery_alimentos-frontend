@@ -1,75 +1,79 @@
-# React + TypeScript + Vite
+# Delivery Alimentos FitNutri - Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+[FitHub Delivery](#delivery-alimentos-fitnutri---frontend)
 
-Currently, two official plugins are available:
+## 1. Descrição
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+O **FitNutri Delivery** é uma aplicação Front-end desenvolvida para oferecer uma interface de delivery de alimentos saudáveis. A aplicação permite visualizar produtos, categorias, realizar buscas e interagir com o carrinho de compras.
 
-## React Compiler
+## 2. Principais Funcionalidades
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+* Visualização de produtos e categorias.
+* Busca e filtragem de produtos.
+* Sistema de carrinho de compras.
+* Navegação entre páginas.
+* Integração com a API Back-end.
+* Interface responsiva.
 
-## Expanding the ESLint configuration
+## 3. Tecnologias utilizadas
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+| Tecnologia   | Utilização                   |
+| ------------ | ---------------------------- |
+| React        | Desenvolvimento da interface |
+| Vite         | Ferramenta de build          |
+| TypeScript   | Linguagem                    |
+| Tailwind CSS | Estilização                  |
+| Axios        | Integração com a API         |
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## 4. Requisitos
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+Para executar o projeto localmente, você precisará:
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+* [Node.js](https://nodejs.org/)
+* npm ou outro gerenciador de pacotes
+* Git
 
+## 5. Como Executar o projeto
+
+### 5.1. Clonando o projeto
+
+```bash
+git clone https://github.com/Grupo-05-Turma-Java-85/delivery_alimentos-frontend.git
 ```
 
-You can also install [eslint-plugin-react-x](https://npmx.dev/package/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://npmx.dev/package/eslint-plugin-react-dom) for React-specific lint rules:
+Entre na pasta do projeto:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
+```bash
+cd delivery_alimentos-frontend
 ```
+
+### 5.2. Instalando as dependências
+
+```bash
+npm install
+```
+
+### 5.3. Executando o projeto
+
+```bash
+npm run dev
+```
+
+Após a inicialização, acesse a aplicação pelo endereço informado no terminal, geralmente:
+
+```text
+http://localhost:5173
+```
+
+## 6. Contribuição
+
+Este repositório faz parte de um projeto educacional.
+
+Sugestões, correções e melhorias podem ser realizadas por meio de **issues** e **pull requests**.
+
+## 7. Contato
+
+Desenvolvido por **Grupo 05 - Turma Java 85**.
+
+💻 Obrigada por visitar o projeto!
+
