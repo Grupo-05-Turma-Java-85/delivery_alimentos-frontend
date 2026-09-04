@@ -4,7 +4,6 @@ import {
   SealCheckIcon,
   UsersThreeIcon,
   ArrowRightIcon,
-  SparkleIcon,
 } from "@phosphor-icons/react";
  
 import BotaoCarrinho from "../../components/botaocarrinho/BotaoCarrinho";

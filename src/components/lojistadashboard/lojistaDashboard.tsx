@@ -1,5 +1,3 @@
-import React from 'react';
- 
 export default function LojistaDashboard() {
   return (
 <div className="bg-surface text-on-surface font-body min-h-screen flex flex-col md:flex-row">
